@@ -1,0 +1,23 @@
+import bpy 
+import random
+
+bpy.ops.object.select_all(action='SELECT')
+bpy.ops.object.delete(use_global=False)
+
+
+s=2.2
+for x in range(10):
+    for y in range(10):
+        bpy.ops.mesh.primitive_cube_add(size=2, enter_editmode=False, align='WORLD', location=(x*s, y*s, 0), scale=(1, 1, random.randrange(1,12,2)))
+        r=random.random()
+        if r < 0.33 :
+            bpy.context.object.data.materials.append(bpy.data.materials["1"])
+        if 0.33< r < 0.66 :
+            bpy.context.object.data.materials.append(bpy.data.materials["2"])
+            
+        else:
+            bpy.context.object.data.materials.append(bpy.data.materials["3"])
+            
+            
+bpy.ops.object.select_all(action='SELECT')
+bpy.ops.object.join()
